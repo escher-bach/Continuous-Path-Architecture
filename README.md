@@ -70,7 +70,6 @@ Known constraints of the current design, visible in the notebook:
 - **Fixed path resolution.** `M` sample points bound the path's resolution regardless of sequence length (`M = 32` vs. sequences up to 64 in the validation run). Long sequences are undersampled at initialization; the time-warp can only redistribute those samples, not add more.
 - **Terminal-tangent bottleneck.** All sequence information must reach the endpoint of the path to influence prediction, and the learned inverse of the depth transformations is only approximate (a `d → d×d` hypernetwork applied to the terminal point).
 - **Training fragility.** The diagnostic suite exists because these failure modes were observed: embedding collapse (tracked via effective rank / mean cosine / nearest-neighbour distance), vanishing reparametrization gradients, and path-energy blowups across layers. Metrics are split into fatal and severe classes and logged throughout training.
-- **Baseline comparison not yet valid.** The in-notebook transformer run is stale — it calls a `get_batch` helper that predates the current sequential dataloader (`get_batches`) — so neither model's printed outputs constitute a comparison. Re-running both under the same protocol is the open validation task.
 
 ---
 
